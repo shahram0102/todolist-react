@@ -15,7 +15,12 @@ const AddTodos = () => {
       setIsError(false);
       setTodos((prevState) => [
         ...prevState,
-        { ...inputValue, id: Date.now(), isCompleted: false },
+        {
+          title: inputValue,
+          id: Date.now(),
+          isCompleted: false,
+          time: new Date().toISOString(),
+        },
       ]);
       setInputValue("");
     }
@@ -28,7 +33,7 @@ const AddTodos = () => {
   return (
     <form
       onSubmit={submitHandler}
-      className="mt-4 flex-1 gap-2 rounded-lg flex flex-col bg-zinc-800 py-4 px-2 w-[340px] sm:w-[450px] lg:w-[600px] "
+      className="mt-4 flex-1 gap-2 flex flex-col bg-zinc-900 py-4 px-2 w-[340px] sm:w-[450px] lg:w-[600px] "
     >
       <label className=" flex-1 p-1 text-xl flex gap-2">
         <BsSearch className="text-orange-500" />
