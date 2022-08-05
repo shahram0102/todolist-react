@@ -42,9 +42,9 @@ const TodoList = ({ filterTodos }) => {
         return (
           <div
             key={todo.id}
-            className="flex rounded-lg px-3 py-1 gap-2 justify-between border-b-4 pb-2 border-orange-500 shadow-xl shadow-black items-center"
+            className="flex rounded-lg w-[320px] sm:w-full px-3z py-1 gap-2 justify-between border-b-4 pb-2 border-orange-500 shadow-xl shadow-black items-center"
           >
-            <div className="flex flex-col  gap-1 flex-1 max-w-xs">
+            <div className="flex flex-col w-2/3 sm:w-full gap-1 flex-1 max-w-xs">
               <p
                 onClick={() => completedHandler(todo.id)}
                 className={`${
