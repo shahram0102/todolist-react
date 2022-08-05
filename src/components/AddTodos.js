@@ -50,8 +50,8 @@ const AddTodos = () => {
       </label>
       {inputValue.length < 4 && isError && (
         <div className="flex px-2 gap-2 text-xl text-red-500 items-center">
-          <BiErrorCircle />{" "}
-          <span>your todo Length must more than 4 characters</span>
+          <BiErrorCircle className="text-sm sm:text-2xl" />
+          <span className="text-sm sm:text-lg">your todo Length must more than 4 characters</span>
         </div>
       )}
       <div className="flex justify-center items-center gap-2">
