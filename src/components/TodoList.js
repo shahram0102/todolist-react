@@ -3,9 +3,9 @@ import { useTodos, useTodosAction } from "./context/TodoListContext";
 import { BiTrash } from "react-icons/bi";
 import { GiPencil } from "react-icons/gi";
 
-const TodoList = () => {
-  const todos = useTodos();
-  const setTodos = useTodosAction();
+const TodoList = ({ filterTodos }) => {
+  const { todos } = useTodos();
+  const { setTodos, setEditItem } = useTodosAction();
   const deleteTodo = (id) => {
     const filteredTodos = todos.filter((todo) => todo.id !== id);
     setTodos(filteredTodos);
@@ -19,7 +19,13 @@ const TodoList = () => {
     setTodos(updatedTodos);
   };
 
-  console.log(todos);
+  const findItem = (id) => {
+    const todo = todos.find((item) => item.id === id);
+    setEditItem(todo);
+  };
+
+
+
   if (todos.length === 0)
     return (
       <div className="flex flex-col justify-center">
@@ -29,9 +35,10 @@ const TodoList = () => {
         </h2>
       </div>
     );
+
   return (
     <div className="flex flex-col gap-8 px-4  pb-8 border-t-4 py-6 border-orange-500">
-      {todos.map((todo) => {
+      {filterTodos.map((todo) => {
         return (
           <div
             key={todo.id}
@@ -40,7 +47,11 @@ const TodoList = () => {
             <div className="flex flex-col  gap-1 flex-1 max-w-xs">
               <p
                 onClick={() => completedHandler(todo.id)}
-                className={`${!todo.isCompleted? "text-orange-500 cursor-pointer text-lg overflow-x-auto no-scrollbar":"text-orange-500 cursor-pointer line-through opacity-40 text-lg overflow-x-auto no-scrollbar"}`}
+                className={`${
+                  !todo.isCompleted
+                    ? "text-orange-500 cursor-pointer text-lg overflow-x-auto no-scrollbar"
+                    : "text-orange-500 cursor-pointer line-through opacity-40 text-lg overflow-x-auto no-scrollbar"
+                }`}
               >
                 {todo.title}
               </p>
@@ -55,7 +66,10 @@ const TodoList = () => {
               >
                 <BiTrash />
               </span>
-              <span className="text-yellow-300 cursor-pointer">
+              <span
+                onClick={() => findItem(todo.id)}
+                className="text-yellow-300 cursor-pointer"
+              >
                 <GiPencil />
               </span>
             </div>
